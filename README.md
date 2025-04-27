@@ -30,15 +30,12 @@ First, generate the necessary authentication tokens for Jira:
 
 a. Clone this repo.
 b. Install `uv`.
-```
 
-## IDE Integration
+#### IDE Integration
 
 MCP Jira can work with your favorite IDE.
 
-### Cursor Configuration
-
-**Method 1 (Passing Variables Directly):**
+Example: Cursor Configuration
 
 ```json
 {
@@ -62,7 +59,6 @@ MCP Jira can work with your favorite IDE.
 }
 
 ```
-
 
 ## Remarks 
 
