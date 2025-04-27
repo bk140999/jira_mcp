@@ -24,12 +24,12 @@ First, generate the necessary authentication tokens for Jira:
 
 1. Go to https://id.atlassian.com/manage-profile/security/api-tokens
 2. Click **Create API token**, name it
-3. Copy the token immediately
+3. Copy the token 
 
 ### 2. Installation
 
-a. Clone this repo.
-b. Install `uv`.
+1. Clone this repo.
+2. Install `uv`.
 
 #### IDE Integration
 
