@@ -47,7 +47,7 @@ MCP Jira can work with your favorite IDE.
       "command": "uv",
       "args": [
         "--directory",
-        "/Users/tushar.shahi/tushar/mcp/jira/server",
+        "/Users/PATH/TO/jira/server",
         "run",
         "jira.py"
       ],
