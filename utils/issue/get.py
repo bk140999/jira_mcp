@@ -1,8 +1,8 @@
 import httpx
-from httpx import BasicAuth 
 from typing import Dict, Any
 from ..config import JiraConfig
 import json
+
 async def get_issue(issue_id_or_key: str) -> Dict[str, Any]:
     """
     Get a single Jira issue by ID or key.
@@ -14,17 +14,24 @@ async def get_issue(issue_id_or_key: str) -> Dict[str, Any]:
         Dict containing the issue details
     """
     JiraConfig.validate_config()
-    url = f"{JiraConfig.BASE_URL}/rest/api/3/issue/{issue_id_or_key}"
-    auth = BasicAuth(JiraConfig.USER_EMAIL, JiraConfig.API_TOKEN)
+    url = f"{JiraConfig.BASE_URL}/rest/api/2/issue/{issue_id_or_key}"
+    
     headers = {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {JiraConfig.API_TOKEN}"
     }
+    
+    # If you have a cookie for session authentication, add it here
+    cookies = {}
+    if hasattr(JiraConfig, 'SESSION_COOKIE') and JiraConfig.SESSION_COOKIE:
+        cookies = {"JSESSIONID": JiraConfig.SESSION_COOKIE}
 
     async with httpx.AsyncClient() as client:
         response = await client.get(
             url,
             headers=headers,
-            auth=auth
+            cookies=cookies
         )
         response.raise_for_status()
         json_response = response.json()

@@ -15,24 +15,44 @@ async def get_project(project_key: Optional[str] = None, project_id: Optional[st
     """
     JiraConfig.validate_config()
     if project_key:
-        url = f"{JiraConfig.BASE_URL}/rest/api/3/project/{project_key}"
+        url = f"{JiraConfig.BASE_URL}/rest/api/2/project/{project_key}"
     elif project_id:
-        url = f"{JiraConfig.BASE_URL}/rest/api/3/project/{project_id}"
+        url = f"{JiraConfig.BASE_URL}/rest/api/2/project/{project_id}"
     else:
         raise ValueError("Either project_key or project_id must be provided")
-    auth = BasicAuth(JiraConfig.USER_EMAIL, JiraConfig.API_TOKEN)
-    headers = {
-        "Accept": "application/json"
-    }
 
-    async with httpx.AsyncClient() as client:
-        response = await client.get(
-            url,
-            headers=headers,
-            auth=auth
-        )
-        response.raise_for_status()
-        json_response = response.json()
-        print(json_response)
-        return json_response
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {JiraConfig.API_TOKEN}"
+    }
+    
+    # If you have a cookie for session authentication, add it here
+    cookies = {}
+    if hasattr(JiraConfig, 'SESSION_COOKIE') and JiraConfig.SESSION_COOKIE:
+        cookies = {"JSESSIONID": JiraConfig.SESSION_COOKIE}
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                url,
+                headers=headers,
+                cookies=cookies
+            )
+            response.raise_for_status()
+            json_response = response.json()
+            return {
+                "success": True,
+                "project": json_response
+            }
+    except httpx.HTTPStatusError as e:
+        return {
+            "success": False,
+            "error": f"HTTP error occurred: {str(e)}"
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": f"An error occurred: {str(e)}"
+        }
 

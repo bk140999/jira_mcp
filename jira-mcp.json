@@ -1,0 +1,9 @@
+{
+    "name": "Jira Tools",
+    "description": "Tools for interacting with Jira - creating tickets, fetching project details, and managing issues",
+    "server": {
+        "host": "127.0.0.1",
+        "port": 7777,
+        "protocol": "http"
+    }
+} 

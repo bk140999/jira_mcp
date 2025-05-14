@@ -6,6 +6,7 @@ class JiraConfig:
     USER_EMAIL: str = os.getenv('JIRA_USER_EMAIL')
     API_TOKEN: str = os.getenv('JIRA_API_TOKEN')
     USER_ID: str = os.getenv('JIRA_USER_ID')
+    SESSION_COOKIE: Optional[str] = os.getenv('JIRA_SESSION_COOKIE')
 
     @classmethod
     def validate_config(cls) -> None:
