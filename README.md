@@ -37,11 +37,11 @@ First, generate the necessary authentication tokens for Jira:
 3. Copy the token 
 
 After generating token create an .env file and add following keys
-JIRA_BASE_URL=""
+`JIRA_BASE_URL=""
 JIRA_USER_EMAIL=""
 JIRA_API_TOKEN=""
 JIRA_USER_ID=""
-JIRA_SESSION_COOKIE=""
+JIRA_SESSION_COOKIE=""`
 
 ### 2. Installation
 
