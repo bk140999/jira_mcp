@@ -7,11 +7,16 @@ Model Context Protocol (MCP) server for Jira. This integration supports updating
 Ask your AI assistant to:
 
 - **📝 Create Jira Tickets** - Create Jira tickets right from cursor
-- **📄 Get project info** - Fetch project info
+- **📄 Get project info** - Fetch project info using key or peject id
+- **📄 Get project search option** - search project on various inputs
+- **✏️ Get Jira Comment** - Get Jira comment by providing the issue key
+- **💬 Add Jira Comment** - Add a new comment to a Jira issue using the issue key and comment content
+- **🛠️ Update Jira Fields** - Modify fields like summary, status, or priority on a Jira issue using the issue key and field values
 
-### Feature Demo
 
-![Demo](https://github.com/TusharShahi/mcp-jira/blob/master/demo/recording.gif)
+
+
+
 
 
 ## Quick Start Guide
@@ -25,11 +30,24 @@ First, generate the necessary authentication tokens for Jira:
 1. Go to https://id.atlassian.com/manage-profile/security/api-tokens
 2. Click **Create API token**, name it
 3. Copy the token 
+#### For Self Hosted
+
+1. Go to your profile
+2. Click **Create Personal Access token**, name it
+3. Copy the token 
+
+After generating token create an .env file and add following keys
+JIRA_BASE_URL=""
+JIRA_USER_EMAIL=""
+JIRA_API_TOKEN=""
+JIRA_USER_ID=""
+JIRA_SESSION_COOKIE=""
 
 ### 2. Installation
 
 1. Clone this repo.
-2. Install `uv`.
+2. Run `pip install requirements.txt`.
+3. Run `python jira.py`
 
 #### IDE Integration
 
@@ -41,26 +59,14 @@ Example: Cursor Configuration
 {
   "mcpServers": {
     "jira": {
-      "command": "uv",
-      "args": [
-        "--directory",
-        "/Users/PATH/TO/jira/server",
-        "run",
-        "jira.py"
-      ],
-      "env": {
-        "JIRA_API_TOKEN": "XXXX",
-        "JIRA_BASE_URL": "XXXX",
-        "JIRA_USER_EMAIL": "XXXX",
-        "JIRA_USER_ID": "XXXX" 
-      }
-    },
+      "url": "http://127.0.0.1:7777/jira/sse"
+    }
   }
 }
 
 ```
 
 ## Remarks 
+You are ready to use all the tools available in this mcp server
 
-This is not an official Atlassian product.
 
